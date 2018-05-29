@@ -1,0 +1,149 @@
+<TelaMenu>:
+    canvas:
+        Rectangle:
+            source: 'img/bg.png'
+            size: self.width, self.height
+
+    Button:
+        id: btn_analog
+        size_hint: 0.186, 0.125
+        center_x: root.center_x - self.width
+        center_y: root.center_y - 110
+        background_normal: 'img/btn-analog.png'
+        background_down: 'img/btn-analog-down.png'
+        on_release:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'analogica'
+
+    Button:
+        id: btn_digital
+        size_hint: 0.186, 0.125
+        center_x: root.center_x + self.width
+        center_y: root.center_y - 110
+        background_normal: 'img/btn-digital.png'
+        background_down: 'img/btn-digital-down.png'
+        on_release:
+            root.manager.transition.direction = 'left'
+            root.manager.current = 'digital'
+
+            
+<TelaDigital>:    
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            source: 'img/bg_all.jpg'
+            pos: self.pos
+            size: self.size
+    
+    img: img_async
+
+    Label:
+        text: '[color=#1F2526FF]Inversor[/color] [color=#258FA1FF][b]WEG CFW10[/b][/color]'
+        center_y: root.center_y - 10
+        font_size: 45
+        markup: True
+
+    AsyncImage:
+        id: img_async
+        size_hint: 0.400, 0.400
+        center_x: root.center_x + 170
+        center_y: root.center_y - 40
+        source: './img/fan-stoped.png'
+        nocache: True
+
+    Label:
+        id: info_motor
+        markup: True
+        text: '[color=#1F2526FF]Motor [b]DESLIGADO[/b][/color]'
+        font_size: 23
+        center_x: root.center_x + 170
+        center_y: root.center_y - 310   
+
+    Button:
+        id: btn_on_off
+        size_hint: 0.186, 0.125
+        center_x: root.center_x - 190
+        center_y: root.center_y + 88
+        background_normal: 'img/btn-on-off.png'
+        background_down: 'img/btn-on-off-down.png'
+        on_press: 
+            root.partida_motor()
+        
+    Button:
+        id: btn_inverter
+        size_hint: 0.186, 0.125
+        center_x: root.center_x - 190
+        center_y: root.center_y + 19
+        background_normal: 'img/btn-inverter.png'
+        background_down: 'img/btn-inverter-down.png'
+        on_press:
+            root.inverte_giro()
+    
+    Button:
+        id: btn_back_digital
+        size_hint: 0.186, 0.125
+        center_x: root.center_x - 190
+        center_y: root.center_y - 50
+        background_normal: 'img/btn-voltar.png'
+        background_down: 'img/btn-voltar-down.png'
+        on_release:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'menu'
+
+<TelaAnalog>:
+    canvas:
+        Rectangle:
+            source: './img/bg_all.jpg'
+            size: (self.width, self.height)
+
+    Label:
+        text: '[color=#1F2526FF][b]Defina a velocidade\n      para o motor[/b][/color]'
+        center_y: root.center_y - 40
+        font_size: 45
+        markup: True
+        
+    Slider:
+        id: slider
+        size_hint_x: None
+        size_hint_y: None
+        width: 400
+        width: 400
+        min: 0
+        max: 100
+        center_x: root.center_x
+        center_y: root.center_y + 40
+        on_value:
+            root.valor_velocidade()
+
+    Button:
+        id: btn_def_vel
+        size_hint: 0.186, 0.125
+        center_x: root.center_x + self.width
+        center_y: root.center_y - 150
+        background_normal: 'img/btn-definir.png'
+        background_down: 'img/btn-definir-down.png'
+        on_press:
+            root.set_speed()
+            
+    Button:
+        id: btn_back_analogica
+        size_hint: 0.186, 0.125
+        center_x: root.center_x - self.width
+        center_y: root.center_y - 150
+        background_normal: 'img/btn-voltar.png'
+        background_down: 'img/btn-voltar-down.png'
+        on_release:
+            root.manager.transition.direction = 'left'
+            root.manager.current = 'menu'
+
+    Label:
+        id: lbl_vel
+        markup: True
+        text: "[b][color=#1F2526FF]Velocidade: [/color] [color=#20BED8FF]0%[/color][/b]"
+        font_size: 35
+        center_x: root.center_x
+        center_y: root.center_y - 240
+
+
+
