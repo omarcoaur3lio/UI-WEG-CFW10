@@ -14,16 +14,17 @@ from kivy.properties import ObjectProperty
 
 liga = 0
 sentido = 0
-var_pwm = gpio.PWM(23, 100)
+
 
 # Configuração dos pinos de I/O
 gpio.setmode(gpio.BOARD)
 gpio.setup(23, gpio.OUT)
 gpio.setup(19, gpio.OUT)
 gpio.setup(21, gpio.OUT)
-
+var_pwm = gpio.PWM(23, 100)
 # Silenciando avisos gpio
 gpio.setwarnings(False)
+
 # Inicializando PWM
 var_pwm.start(0)
 
